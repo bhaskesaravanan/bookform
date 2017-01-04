@@ -1,0 +1,32 @@
+<html>
+<head>
+		<title>Registration form for Book</title>
+		<link rel="stylesheet" type="text/css" href= "bookform.css">
+</head>
+<body background="bookfrom3.jpg">
+
+<div class="Adminclass">
+
+	<h1>Welcome To Book Store !!</h1>
+	<form id="bookform" action="https://workwithflask.appspot.com/userdetails" method="get" >
+		<label><b><h3>Username:</center></h3></b></label>
+			<input type="text" placeholder="Enter Username" name="uname" class="Admininput" required >
+
+			<label><b><h3>EMail-Id:</h3></b></label>
+			<input type="email" placeholder="Enter Email-Id" name="email" class="Admininput" required >
+
+			<label><b><h3>Select Book From List:</h3></b></label>
+			<select type="text" class="Admininput" name="book">
+			<option placeholder="select book from List" disabled selected>--select book--</option>
+				{% for i in book %}
+				<option > {{ i.bookname }}</option>
+				{% endfor %}
+			</select><br><br>
+
+			<button type="submit" id="button">SUBMIT</button>
+
+		<button type="button" id="cancelbtn"><a href="https://workwithflask.appspot.com/">CANCEL</a></button>
+		</form>
+    </div>
+</body>
+</html>

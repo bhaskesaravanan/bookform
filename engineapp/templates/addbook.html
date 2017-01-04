@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Book</title>
+	 <link rel="stylesheet" type="text/css" href= "bookform.css">
+
+</head>
+<body  >
+	<div class="Adminclass">
+
+	<h1>Welcome To Book Store !!</h1>
+	<form id="bookform" action="http://localhost:8080/bookdetails" method="get" >
+		<label><b><h3>Book Name:</center></h3></b></label>
+			<input type="text" placeholder="Enter Username" name="bookname" class="Admininput" required >
+
+			<label><b><h3>Author Name:</h3></b></label>
+			<input type="text" placeholder="Enter Author Name" name="authorname" class="Admininput" required >
+
+			<label><b><h3>Description About The Book:</h3></b></label>
+			<textarea class="Admininput" placeholder="Enter Description about the Book" name="des"></textarea>
+
+		<button type="submit" id="button"value="submit">submit</button>
+
+		<button type="button" id="cancelbtn"><a href="http://localhost:8080/">cancel</a></button>
+		</form>
+
+		 <!--<a href="#" onclick="signOut();">Sign out</a>-->
+    <!--<script>-->
+    <!--function signOut() {-->
+    <!--var auth2 = gapi.auth2.getAuthInstance();-->
+    <!--auth2.signOut().then(function () {-->
+    <!--console.log('User signed out.');-->
+    <!--});-->
+    <!--}-->
+    <!--</script>-->
+
+    </div>
+</body>
+</html>

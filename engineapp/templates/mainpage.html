@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta>
+    <link rel="stylesheet" type="text/css" href="bookform.css">
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+          content="409456169998-ltl07nbg70vlpkhfeuauphoqmvjghuci.apps.googleusercontent.com">
+</head>
+<body>
+<div id="test">
+<h1>
+    <center>WELCOME TO BOOK STORE</center>
+</h1>
+<div class="divclass">
+
+    <h2>
+        <center> Login Form</center>
+    </h2>
+
+    <form action="https://workwithflask.appspot.com/addbook" method='post' class="formclass">
+        <label><b><p>Username:</center></p></b></label>
+        <input type="text" placeholder="Enter Email-Id" name="email" required class="Admininput">
+
+        <label><b><p>Password:</p></b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required class="Admininput">
+
+        <button type="submit" class="button">Login</button>
+
+        <button type="button" class="button"><a href="https://workwithflask.appspot.com/usersinup">signup</a></button>
+       <button id="signinButton" data-onsuccess="onSignIn">Sign in with Google</button>
+    </form>
+    <!--// auth2 is initialized with gapi.auth2.init() and a user is signed in.-->
+
+     <script>
+          $('#signinButton').click(function() {
+                 window.location.href = "/addbook";
+            auth2.grantOfflineAccess({'/addbook': 'hi am sai pavan'}).then({"code":"4/yU4cQZTMnnMtetyFcIWNItG32eKxxxgXXX-Z4yyJJJo.4qHskT-UtugceFc0ZRONyF4z7U4UmAI"});
+          });
+        </script>
+    <!--<script></script>-->
+    <!--function onSignIn(googleUser){-->
+			  <!--window.location.href = "/addbook";-->
+			  <!--var profile = googleUser.getBasicProfile();-->
+              <!--console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.-->
+              <!--console.log('Name: ' + profile.getName());-->
+              <!--console.log('Image URL: ' + profile.getImageUrl());-->
+              <!--console.log('Email: ' + profile.getEmail());-->
+              <!--}-->
+      <!--&lt;!&ndash;function onSignIn(googleUser) {&ndash;&gt;-->
+       <!--&lt;!&ndash;var id_token = googleUser.getAuthResponse().id_token;&ndash;&gt;-->
+        <!--&lt;!&ndash;console.log(id_token);&ndash;&gt;-->
+        <!--&lt;!&ndash;}&ndash;&gt;-->
+    <!--</script>-->
+
+
+
+</div>
+</div>
+</body>
+</html>

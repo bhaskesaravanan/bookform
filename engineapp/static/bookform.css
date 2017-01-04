@@ -1,0 +1,166 @@
+
+#test
+{
+	background-image: url("./static/bookimage6.jpg");
+	background-repeat:no-repeat;
+	background-size: cover;
+	background-size: cover;
+}
+form
+{
+	color:	red;
+	font-size: 20px;
+
+}
+h1
+{
+	color:red;
+}
+h2
+{
+	color:#4CAF50;
+}
+a
+{
+	text-align: center;
+	text-decoration: none;
+}
+p
+{
+	font-size: 20px;
+	text-align: left;
+	color: #4CAF50;
+
+}
+#welcome
+{
+	text-align: center;
+	height: 100px;
+	width: 100%;
+}
+#mainbutton
+{
+
+background-color: rgb(12, 11, 11);
+color: white;
+padding: 14px 20px;
+margin: 30px 0;
+border: none;
+cursor: pointer;
+width: 10%;
+text-align: last;
+
+}
+
+#main
+{
+background-color: rgb(12, 11, 11);
+color: white;
+padding: 14px 20px;
+margin: 30px 0;
+border: none;
+cursor: pointer;
+width: 10%;
+text-align: last;
+
+}
+
+
+
+.center
+{
+	text-align: center;
+}
+
+#admin
+{
+	text-align: center;
+
+}
+
+#add
+{
+	background-image: url(bookimage6.jpg);
+
+}
+
+
+/* css for usersinup and mainpage starts from here*/
+.divclass
+{
+width:40%;
+padding: 30px;
+margin:center;
+
+
+}
+
+
+.formclass {
+
+width:50%;
+height:50%;
+margin:0 auto;
+padding:10px;
+
+}
+
+.Admininput {
+width: 80%;
+padding: 6px 10px;
+margin: 8px 0;
+display: block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+border-radius: 10px 10px;
+}
+
+.button
+{
+background-color: #4CAF50;
+padding: 6px 12px;
+margin: 30px 0;
+border-radius: 5px 5px 5px 5px;
+cursor: pointer;
+width: 30%;
+
+
+}
+
+#sbutton
+{
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 30px 0;
+border: none;
+cursor: pointer;
+width: 20%;
+
+}
+
+
+
+.cancelbtn {
+padding: 14px 20px;
+background-color:#f1f1f1;
+background-color: #f44336;
+margin: 30px 0;
+border: none;
+cursor: pointer;
+width: 40%;
+
+
+}
+
+
+
+#bookform {
+width:50%;
+height:50%
+
+padding:20px;
+
+
+
+}
