@@ -39,23 +39,26 @@
 <div class="container">
 
     <div>
-        <button type="button" class="btn"><a href="http://localhost:9000/">logout </a></button>
+        <button type="button" class="btn"><a href="/adminlogout">logout </a></button>
     </div>
 
-<form action="http://localhost:9000/addingbook" method="get">
+<form action="/addingbook" method="post">
     <h3>Book To Add:</h3> <input type="text" name="bookname" ><br>
     <h3>Genre:</h3>      <input type="text" name="genre"><br>
     <h3>Author:</h3>     <input type="text" name="authorname">
             <input type="submit" value="submit">
-
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+           {% for message in messages %}
+           <li>{{ message }}</li>
+           {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
 
 </form>
-
 </div>
-
-
-
-
 </body>
 </html>
