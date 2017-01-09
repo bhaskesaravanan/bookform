@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="/static/stylesheet/stylesheet.css"/>
-    <script type="text/javascript" src="/static/script.js"></script>
+
     <title>HomePage</title>
 </head>
 <body>
@@ -93,12 +93,12 @@
       <input type="text" placeholder="Enter Your EmailId" name="email" required>
 
       <label><b>Password<span class="required">*</span></b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" id="psw" placeholder="Enter Password" name="psw" required>
 
       <label><b>Confirm Password<span class="required">*</span></b></label>
-      <input type="password" placeholder="Re Enter Password" name="cpsw" required>
+      <input type="password" id="cpsw" placeholder="Re Enter Password" name="cpsw" required>
 
-      <button type="submit">Signup</button>
+      <button type="submit" onclick="return Validate()">Signup</button>
       <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
     </div>
  </form>
@@ -112,6 +112,6 @@
                 </ul>
             {% endif %}
         {% endwith %}
-
+<script type="text/javascript" src="/static/script.js"></script>
 </body>
 </html>

@@ -4,10 +4,8 @@ from google.appengine.api import mail
 
 import config
 
-# import logging
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
-import uuid, time, datetime
 from functools import wraps
 from ndb_files import *
 
@@ -28,16 +26,13 @@ def login_required(test):
     return wrap
 
 def userdetails():
-    if request.form['psw'] == request.form['cpsw']:
-        # uname = request.form['uname']
-        pwd = request.form['psw']
-        # hash_pwd = User(pwd)
-        user_details = UserDetails(
-            userName = request.form['username'],
-            email_ID = request.form['email'],
-            password = generate_password_hash(pwd)
-        )
-        user_details.put()
+    pwd = request.form['psw']
+    user_details = UserDetails(
+        userName = request.form['username'],
+        email_ID = request.form['email'],
+        password = generate_password_hash(pwd)
+    )
+    user_details.put()
 
 
 def newbook_request_mailing(to_user, name, book):
@@ -63,6 +58,12 @@ def readbook_request_mailing(book, receiver, name):
 
     body_to_admin = str('%s from %s has been requested to read %s.' % (name, receiver, book))
     mail.send_mail(sender, admin_receiver, subject_to_admin, body_to_admin)
+
+def admin_request_mail(to):
+    sender = str('karthik.sabapathy@adaptavantcloud.com')
+    subject = str('Make me as a Admin')
+    body = str('Click this link and fill up the admin signup form. \nhttps://keepanyname.appspot.com/adminsignup')
+    mail.send_mail(sender, to, subject, body)
 
 @app.route('/')
 def homepage():
@@ -111,8 +112,8 @@ def bookrequest():
 @app.route('/bookread', methods = ['POST'])
 def bookread():
     book = request.form['book']
-    receiver = str(session['user_email'])
-    name = str(session['username'])
+    receiver = session['user_email']
+    name = session['username']
     deferred.defer(readbook_request_mailing, book, receiver, name)
     flash('Your book will be sent to you shortly.')
     return redirect(url_for('userpage'))
@@ -137,11 +138,8 @@ def adminsignup():
 
 @app.route('/adminrequest')
 def adminrequest():
-    sender = str('karthik.sabapathy@adaptavantcloud.com')
-    to = str(session['user_email'])
-    subject = str('Make me as a Admin')
-    body = str('Click this link and fill up the admin signup form. \nhttps://keepanyname.appspot.com/adminsignup' )
-    mail.send_mail(sender, to, subject, body)
+    to = session['user_email']
+    deferred.defer(admin_request_mail, to)
     flash('Check out your email to get the link for admin form.')
     return redirect(url_for('userpage'))
 
@@ -163,53 +161,6 @@ def signedup():
             return redirect(url_for('adminsignup'))
     flash('Passwords do not match')
     return redirect(url_for('adminsignup'))
-
-# @app.route('/forgot')
-# def forgot():
-#     return render_template('forgot_password.html')
-#
-# @app.route('/forgotpassword', methods=['POST'])
-# def forgot_password():
-#     uid = uuid.uuid4()
-#     now = datetime.now()
-#     timestamp = now.time()
-#     link = 'https://keepanyname.appspot.com/resetpassword/{}'.format(uid, timestamp)
-#     sender = str('karthik.sabapathy@adaptavantcloud.com')
-#     to = str(request.form['mailid'])
-#     subject = str('Make Password Request - Bookforms')
-#     body = str('Click this link to reset your password.\n' + link)
-#     mail.send_mail(sender, to, subject, body)
-    # uid = uuid.uuid4()
-    # timestamp = time.time()
-    # link='https://keepanyname.appspot.com/resetpassword/{}?expires_in={}'.format(uid, timestamp + 30*60*1000)
-    # to = str(request.form['mailid'])
-    # sender = str('karthik.sabapathy@adaptavantcloud.com')
-    # subject = str('Link to reset your password')
-    # body = str('Click this link to reset your password' + link)
-    # mail.send_mail(sender, to, subject, body)
-    # flash('Check out your mail to reset the password')
-    # return redirect(url_for('homepage'))
-
-
-# @app.route('/resetpassword/<uid>/<timestamp>')
-# def resetpassword(uid, timestamp):
-#     now = datetime.now()
-#     now = now.time()
-#     if timestamp.hour == now.hour:
-#         minutedifference = timestamp.minute - now.minute
-#     if minutedifference <= 30:
-#         return redirect(url_for(resetpasswords))
-
-    # return 'session expired'
-    # expires_in = request.get("expires_in")
-    # linkcreationtime=datetime.datetime.fromtimestamp(expires_in / 1e3)
-    # currenttime=time.time()
-    # exacttime=datetime.datetime.fromtimestamp(currenttime / 1e3)
-    # timedifference=exacttime-linkcreationtime
-    # if timedifference<=30:
-    #     return render_template('resetpassword.html')
-    #
-    # return 'session expired'
 
 @app.route('/admin', methods=['POST'])
 def admin():
