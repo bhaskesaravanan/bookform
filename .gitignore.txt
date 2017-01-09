@@ -1,3 +1,0 @@
-engineapp/lib/
-.idea/
-*.pyc
