@@ -1,3 +1,4 @@
 engineapp/lib/
 .idea/
 *.pyc
+engineapp/.idea
