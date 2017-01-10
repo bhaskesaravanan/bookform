@@ -29,10 +29,10 @@
     </div>
     <div class="container" style="background-color:#f2f2f2;padding:15px 5;">
       <label><b>EmailId<span class="required">*</span></b></label>
-      <input type="text" placeholder="Enter EmailId" name="uname" required>
+      <input type="text" class="text-box" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter EmailId" name="uname" required>
 
       <label><b>Password<span class="required">*</span></b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" class="text-box" placeholder="Enter Password" name="psw" required>
 
       <button type="submit">Login</button>
 
@@ -57,13 +57,13 @@
       <h3 class="cufon-helvetica" style="font-size: 25px;text-align: center;">Login as Admin</h3>
     </div>
     <div class="container" style="background-color:#f2f2f2;padding:15px 5;">
-      <label><b>User Name<span class="required">*</span></b></label>
-      <input type="text" placeholder="Enter User name" name="adminname" required>
+      <label><b>Email Id<span class="required">*</span></b></label>
+      <input type="text" class="text-box" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter Email ID" name="adminname" required>
 
       <label><b>Password<span class="required">*</span></b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password"  class="text-box" placeholder="Enter Password" name="psw" required>
 
-      <button type="submit">Login</button>
+      <button type="submit" >Login</button>
 
     </div>
 
@@ -88,16 +88,16 @@
 
     <div class="container"style="background-color:#f2f2f2;padding:15px 5;">
       <label><b>User Name<span class="required">*</span></b></label>
-      <input type="text" placeholder="Enter User Name" name="username" required>
+      <input type="text" class="text-box" placeholder="Enter User Name" name="username" required>
 
       <label><b>Email-Id<span class="required">*</span></b></label>
-      <input type="text" placeholder="Enter Your EmailId" name="email" required><br>
+      <input type="text" class="text-box" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter Your EmailId" name="email" required><br>
 
       <label><b>Password<span class="required">*</span></b></label>
-      <input type="password" id="psw" placeholder="Enter Password" name="psw" required>
+      <input type="password" class="text-box" id="psw" placeholder="Enter Password" name="psw" required>
 
       <label><b>Confirm Password<span class="required">*</span></b></label>
-      <input type="password" id="cpsw" placeholder="Re Enter Password" name="cpsw" required>
+      <input type="password" class="text-box" id="cpsw" placeholder="Re Enter Password" name="cpsw" required>
 
       <button type="submit" onclick="return Validate()">Signup</button>
       <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
