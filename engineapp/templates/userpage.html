@@ -30,7 +30,9 @@
             {% endif %}
         {% endwith %}
         <form action="/bookrequest" method="post">
-            <h3>Request of books:</h3> <input type='text' name="requirebook">
+            <h3>Request of books:</h3> <br>
+            <h5>Book Name: </h5><input type='text' name="requirebook"><br>
+            <h5>Author: </h5><input type="text" name="authorname">
             <input type="submit" value="submit">
 
         </form>

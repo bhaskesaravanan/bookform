@@ -154,6 +154,11 @@ def userlogout():
 @app.route('/bookrequest', methods = ['POST'])
 def bookrequest():
     book = request.form['requirebook']
+    author = request.form['authorname']
+    if Books.query(Books.name == book).get():
+        if Books.query(Books.author == author).get():
+            flash('The Book you requested is already in the Book list.')
+            return redirect(url_for('userpage'))
     user_email = session['user_email']
     name = session['username']
     deferred.defer(newbook_request_mailing, user_email, name, book)
@@ -240,10 +245,14 @@ def adminpage():
 
 @app.route('/addingbook',methods=['POST'])
 def addingBook():
+    if Books.query(Books.name == request.form['bookname']).get():
+        if Books.query(Books.author == request.form['authorname']).get():
+            flash('This book is already in our list.')
+            return redirect(url_for('adminpage'))
     addbook=Books(name=request.form['bookname'],genre=request.form['genre'],author=request.form['authorname'])
     addbook.put()
     flash("Book added successfully")
-    return render_template('adminpage.html')
+    return redirect(url_for('adminpage'))
 
 @app.route('/adminlogout')
 def adminlogout():
