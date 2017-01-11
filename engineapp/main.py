@@ -85,23 +85,23 @@ def userdetails():
     user_details.put()
 
 
-def newbook_request_mailing(to_user, name, book):
+def newbook_request_mailing(to_user, name, book, author):
     sender = str('karthik.sabapathy@adaptavantcloud.com')
     subject_to_user = str("Book Request acknowledgement")
-    mailbody_to_user = str('%s Book has been requested successfully. Thank you for requesting book on Book Forms.' % (book))
+    mailbody_to_user = str('%s Book written by %s has been requested successfully. Thank you for requesting book on Book Forms.' % (book, author))
     mail.send_mail(sender, to_user, subject_to_user, mailbody_to_user)
     to_admin = sender
     subject_to_admin = str('You have a new Book Request')
-    mailbody_to_admin = str('%s from %s has requested for %s book to be added to the list. Please acknowledge and add the book to the '
-                            'list' % (name, to_user, book))
+    mailbody_to_admin = str('%s from %s has requested for %s book written by %s to be added to the list. Please acknowledge and add the book to the '
+                            'list' % (name, to_user, book, author))
     mail.send_mail(sender, to_admin, subject_to_admin, mailbody_to_admin)
 
 def readbook_request_mailing(book, receiver, name):
 
-    sender = str('karthik.sabapathy@adaptavantcloud.com')
+    sender = "karthik.sabapathy@adaptavantcloud.com"
 
-    subject = str('New Read Book Requested')
-    body = str('Your request to read book %s has been submitted successfully.' % (book))
+    subject = "New Read Book Requested"
+    body = 'Your request to read book %s has been submitted successfully.' % (book)
     mail.send_mail(sender, receiver, subject, body)
     admin_receiver = sender
     subject_to_admin = str('New Read Book Requested')
@@ -161,7 +161,7 @@ def bookrequest():
             return redirect(url_for('userpage'))
     user_email = session['user_email']
     name = session['username']
-    deferred.defer(newbook_request_mailing, user_email, name, book)
+    deferred.defer(newbook_request_mailing, user_email, name, book, author)
     flash('Book requested successfully')
     return redirect(url_for('userpage'))
 
@@ -195,6 +195,9 @@ def adminsignup():
 @app.route('/adminrequest')
 def adminrequest():
     to = session['user_email']
+    if Admins.query(Admins.email == to).get():
+        flash('You are already an Admin in BookForms.')
+        return redirect(url_for('userpage'))
     deferred.defer(admin_request_mail, to)
     flash('Check out your email to get the link for admin form.')
     return redirect(url_for('userpage'))
