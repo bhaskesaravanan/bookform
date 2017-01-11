@@ -107,7 +107,7 @@ def userdetails():
 
 
 def newbook_request_mailing(to_user, name, book):
-    sender = str('bhaskar.saravanan@adaptavantcloud.com')
+    sender = str('shaik.shaida@adaptavantcloud.com')
     subject_to_user = str("Book Request acknowledgement")
     mailbody_to_user = str(
         '%s Book has been requested successfully. Thank you for requesting book on Book Forms.' % (book))
@@ -122,7 +122,7 @@ def newbook_request_mailing(to_user, name, book):
 
 def readbook_request_mailing():
     book = request.form['book']
-    sender = str('bhaskar.saravanan@adaptavantcloud.com')
+    sender = str('shaik.shaida@adaptavantcloud.com')
     receiver = str(session['user_email'])
     subject = str('New Read Book Requested')
     body = str('Your request to read book %s has been submitted successfully.' % (book))
@@ -212,7 +212,7 @@ def adminsignup():
 
 @app.route('/adminrequest')
 def adminrequest():
-    sender = str('bhaskar.saravanan@adaptavantcloud.com')
+    sender = str('shaik.shaida@adaptavantcloud.com')
     to = str(session['user_email'])
     subject = str('Make me as a Admin')
     body = str('Click this link and fill up the admin signup form. \n https://http://helloworld-151108.appspot.com/adminsignup')
@@ -265,7 +265,7 @@ def forgotpassword():
 
 
 
-def send_email(to, body, sender='bhaskar.saravanan@adaptavantcloud.com'):
+def send_email(to, body, sender='shaik.shaida@adaptavantcloud.com'):
         subject = 'Reset Password Request - Bookforms'
         mail.send_mail(sender, to, subject, body)
 
@@ -367,6 +367,20 @@ def addingBook():
     flash("Book added successfully")
     return render_template('adminpage.html')
 
+@app.route('/is_down')
+def is_down():
+# data = json.dumps({'isDown': 'Nope'})
+# return data, 200, {'Content-Type': 'application/json'}
+    books=Books.query().fetch()
+    logging.info(books)
+    payload=[]
+    for book in books:
+        payload.append(book.name)
+    payload = json.dump({"Books": books})
+    logging.info(payload)
+    headers = {'Content-Type': 'application/json'}
+
+    return payload,200,headers
 
 @app.route('/adminlogout')
 def adminlogout():

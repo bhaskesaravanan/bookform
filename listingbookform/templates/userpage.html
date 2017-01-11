@@ -12,8 +12,8 @@
 <h1>Welcome To Book Store !!</h1>
 <form action="/bookread" method="post">
 
-    <h3>List Of Books:</h3> <select name="book">
-                            <option value="list of books">list of books</option>
+    <h3>List Of Books:</h3> <select name="book" onchange="loadbook()">
+                            <option value="list of books" id="book">list of books</option>
                             {% for book in book %}
                                 <option > {{ book.name }}</option>
                             {% endfor %}
@@ -41,6 +41,19 @@
 
 
 </div>
+<script>
+    function loadbook() {
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+var book=JSON.parse(this.responseText)
+document.getElementById("book").innerHTML =book;
+}
+};
+xhttp.open("GET", "is_down()", true);
+xhttp.send();
+}
+</script>
 
 </body>
 </html>

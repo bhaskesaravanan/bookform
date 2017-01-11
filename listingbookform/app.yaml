@@ -1,4 +1,4 @@
-application: helloworld-151108
+application: myfirsthelloworldwithflask
 version: 1
 runtime: python27
 api_version: 1
@@ -10,7 +10,7 @@ handlers:
   upload: favicon\.ico
 
 - url: /static
-  static_dir: static
+  static_dir: css
 
 - url: /static
   static_dir: js
