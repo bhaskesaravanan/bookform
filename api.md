@@ -1,27 +1,29 @@
 
  GET /getBook
      
-    headers: api_key : "secret key"
+    headers:
+    
+          api_key : "secret key"
 
     paramets :
     
-        limit (default 10)
-        author
-        category
-        cursor (optional)
+         limit (default 10)
+         author
+         category
+         cursor (optional)
 
     response : 
     
-         {
-           "books" : {
-                        "id" : {
-                            "name" : "harry potter"
-                            "author" : "JK"
-                            "category": "friction"
-                         }
-                     }
-          "cursor": "xdfsjlkdfjkldf"
-         }
+          {
+            "books" : {
+                         "id" : {
+                             "name" : "harry potter"
+                             "author" : "JK"
+                             "category": "friction"
+                          }
+                      }
+           "cursor": "xdfsjlkdfjkldf"
+          }
 
 POST /addBook
   
