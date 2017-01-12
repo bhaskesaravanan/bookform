@@ -8,17 +8,17 @@
         author
         category
 
- response : 
-    {
-       "books" : {
-                  "id" : {
-                         "name" : "harry potter"
-                         "author" : "JK"
-                          "category": "friction"
-                        }
-                  }
-      "cursor": "xdfsjlkdfjkldf"
-    }
+    response : 
+         {
+           "books" : {
+                        "id" : {
+                            "name" : "harry potter"
+                            "author" : "JK"
+                            "category": "friction"
+                         }
+                     }
+          "cursor": "xdfsjlkdfjkldf"
+         }
 
 POST /addBook
   
