@@ -7,6 +7,7 @@
         limit (default 10)
         author
         category
+        cursor (optional)
 
     response : 
          {
