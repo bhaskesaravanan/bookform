@@ -1,18 +1,18 @@
 
  GET /getBook
      
-    headers:
+   headers:
     
           api_key : "secret key"
 
-    paramets :
+   paramets :
     
          limit (default 10)
          author
          category
          cursor (optional)
 
-    response : 
+   response : 
     
           {
             "books" : {
