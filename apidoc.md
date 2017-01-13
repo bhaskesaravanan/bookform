@@ -1,16 +1,18 @@
 
  GET /getBook
+ 
+  request:
      
-   headers:
-    
-          api_key : "secret key"
+          headers:
 
-   paramets :
-    
-         limit (default 10)
-         author
-         category
-         cursor (optional)
+                 api_key : "secret key"
+
+          paramets :
+
+                limit (default 10)
+                author
+                category
+                cursor (optional)
 
    response : 
     
@@ -26,14 +28,16 @@
           }
 
 POST /addBook
-  
-   headers : 
-        
-        Content-type : application/json, api_key : "secret key"
-    
-   payload :
-         
-        { "name" : "harry potter", "author": "JK", "category" : "friction"}
+   
+   request:
+
+      headers : 
+
+           Content-type : application/json, api_key : "secret key"
+
+      payload :
+
+           { "name" : "harry potter", "author": "JK", "category" : "friction"}
 
    response : 
    
