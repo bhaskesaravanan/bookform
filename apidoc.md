@@ -25,6 +25,7 @@
                           }
                       ]
            "cursor": "xdfsjlkdfjkldf"
+           "more": true
           }
 
 POST /addBook
