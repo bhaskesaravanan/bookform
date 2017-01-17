@@ -6,7 +6,7 @@ $(document).ready(function() {
         if (password === cpassword) {
             $.ajax({
             url: '/signedup',
-            data: {"password": password},
+            data: JSON.stringify({"password": password}),
             type: 'POST',
             success: function(response) {
                 console.log(response);

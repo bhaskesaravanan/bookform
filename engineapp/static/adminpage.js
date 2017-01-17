@@ -6,7 +6,7 @@ $(document).ready(function() {
         var authorname = $('#authorname').val();
         $.ajax({
             url: '/addingbook',
-            data: {"bookname": bookname, "authorname": authorname, "genre": genre},
+            data: JSON.stringify({"bookname": bookname, "authorname": authorname, "genre": genre}),
             type: 'POST',
             success: function(response) {
                 console.log(response);

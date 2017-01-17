@@ -26,7 +26,7 @@ $(document).ready(function() {
         var password = $('#userpassword').val();
         $.ajax({
             url: '/loginpage',
-            data: {"name": name, "password": password},
+            data: JSON.stringify({"name": name, "password": password}),
             type: 'POST',
 //            async: true,
             success: function(response) {
@@ -50,7 +50,7 @@ $(document).ready(function() {
         var password = $('#password').val();
         $.ajax({
             url: '/admin',
-            data: {"adminname": adminname, "password": password},
+            data: JSON.stringify({"adminname": adminname, "password": password}),
             type: 'POST',
             async: true,
             success: function(response) {
@@ -78,7 +78,7 @@ $(document).ready(function() {
         if (psw === cpsw) {
             $.ajax({
             url: '/signup',
-            data: {"uname": uname, "umail": umail, "psw": psw},
+            data: JSON.stringify({"uname": uname, "umail": umail, "psw": psw}),
             type: 'POST',
             async: true,
             success: function(response) {

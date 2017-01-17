@@ -75,11 +75,11 @@ def login_required(test):
             return redirect(url_for('homepage'))
     return wrap
 
-def userdetails():
-    pwd = request.form['psw']
+def userdetails(data):
+    pwd = data.get('psw')
     user_details = UserDetails(
-        userName = request.form['uname'],
-        email_ID = request.form['umail'],
+        userName = data.get('uname'),
+        email_ID = data.get('umail'),
         password = generate_password_hash(pwd)
     )
     user_details.put()
@@ -120,8 +120,9 @@ def homepage():
 
 @app.route('/loginpage', methods = ['POST'])
 def loginpage():
-    username = request.form['name']
-    pswd = request.form['password']
+    data = request.get_json(force=True)
+    username = data.get('name')
+    pswd = data.get('password')
     if UserDetails.query(UserDetails.email_ID == username).get():
         user = UserDetails.query(UserDetails.email_ID == username).get()
         if check_password_hash(user.password, pswd):
@@ -159,8 +160,9 @@ def userlogout():
 
 @app.route('/bookrequest', methods = ['POST'])
 def bookrequest():
-    book = request.form['name']
-    author = request.form['author']
+    data = request.get_json(force=True)
+    book = data.get('name')
+    author = data.get('author')
     if Books.query(ndb.AND(Books.name == book, Books.author == author)).get():
     # if Books.query(Books.name == book).get():
         # if Books.query(Books.author == author).get():
@@ -170,6 +172,9 @@ def bookrequest():
             return jsonify(result = data)
             # data = json.dumps({'book': {'name': book, 'author': author}})
             # return data, 200, {'Content-type': 'application/json'}
+    if book == '' or author == '':
+        data = 'Book name or Author is missing. Please enter.'
+        return jsonify(result = data)
     user_email = session['user_email']
     name = session['username']
     deferred.defer(newbook_request_mailing, user_email, name, book, author)
@@ -180,7 +185,8 @@ def bookrequest():
 
 @app.route('/bookread', methods = ['POST'])
 def bookread():
-    book = request.form['name']
+    data = request.get_json(force=True)
+    book = data.get('name')
     receiver = session['user_email']
     name = session['username']
     deferred.defer(readbook_request_mailing, book, receiver, name)
@@ -192,8 +198,9 @@ def bookread():
 @app.route('/signup', methods=['POST'])
 def signup():
     userdet = UserDetails.query().fetch()
+    data = request.get_json(force=True)
     for user in userdet:
-        if user.email_ID == request.form['umail']:
+        if user.email_ID == data.get('umail'):
             # flash('The email ID you entered has already been signed up.')
             # return redirect(url_for('homepage'))
             data = 'The email ID you entered has already been signed up.'
@@ -201,11 +208,11 @@ def signup():
         else:
             continue
     else:
-        userdetails()
+        userdetails(data)
         # flash('Signed up successfully. Log in to access your account in BookForm.')
         # return redirect(url_for('homepage'))
-        data = 'Signed up successfully. Log in to access your account in BookForm.'
-        return jsonify(result = data)
+        return_data = 'Signed up successfully. Log in to access your account in BookForm.'
+        return jsonify(result = return_data)
 
 @app.route('/adminsignup')
 @login_required
@@ -248,7 +255,8 @@ def signedup():
         #     flash('You are already an Admin in Bookforms.')
         #     return redirect(url_for('adminsignup'))
         # elif UserDetails.query(UserDetails.email_ID == request.form['adminemail']).get():
-            pw = request.form['password']
+            data = request.get_json(force=True)
+            pw = data.get('password')
             user_key = ndb.Key(UserDetails, session['user_email'])
             admins = Admins(
             username = session['username'],
@@ -269,8 +277,9 @@ def signedup():
 
 @app.route('/admin', methods=['POST'])
 def admin():
-    adminname = request.form['adminname']
-    adminpsw = request.form['password']
+    data = request.get_json(force=True)
+    adminname = data.get('adminname')
+    adminpsw = data.get('password')
     if Admins.query(Admins.email == adminname).get():
         admin = Admins.query(Admins.email == adminname).get()
         if check_password_hash(admin.password, adminpsw):
@@ -297,9 +306,10 @@ def adminpage():
 
 @app.route('/addingbook',methods=['POST'])
 def addingBook():
-    bookname = request.form['bookname']
-    authorname = request.form['authorname']
-    genre = request.form['genre']
+    data = request.get_json(force=True)
+    bookname = data.get('bookname')
+    authorname = data.get('authorname')
+    genre = data.get('genre')
     if Books.query(ndb.AND(Books.name == bookname, Books.author == authorname)).get():
     # if Books.query(Books.name == bookname).get():
     #     if Books.query(Books.author == authorname).get():

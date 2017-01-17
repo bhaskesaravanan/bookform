@@ -6,7 +6,7 @@ $(document).ready(function() {
         var author = $('#authorname').val();
         $.ajax({
             url: '/bookrequest',
-            data: {"name": name, "author": author},
+            data: JSON.stringify({"name": name, "author": author}),
             type: 'POST',
             success: function(response) {
                 console.log(response);
@@ -27,7 +27,7 @@ $(document).ready(function() {
         else {
             $.ajax({
             url: '/bookread',
-            data: {"name": name},
+            data: JSON.stringify({"name": name}),
             type: 'POST',
             success: function(response) {
                 console.log(response);
