@@ -19,7 +19,7 @@
 
 <div id="id01" class="modal">
 
-  <form class="modal-content animate" action="/loginpage" method="post">
+  <form class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
@@ -29,13 +29,13 @@
     </div>
     <div class="container" style="background-color:#f2f2f2;padding:15px 5;">
       <label><b>EmailId<span class="required">*</span></b></label>
-      <input type="text" class="text-box" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter EmailId" name="uname" required>
+      <input type="text" class="text-box" id="username" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter EmailId" name="name" required>
 
       <label><b>Password<span class="required">*</span></b></label>
-      <input type="password" class="text-box" placeholder="Enter Password" name="psw" required>
+      <input type="password" id="userpassword" class="text-box" placeholder="Enter Password" name="password" required>
 
-      <button type="submit">Login</button>
-
+      <button id="loginbutton" type="button">Login</button>
+        <div id="loginflash"></div>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
@@ -48,7 +48,7 @@
 </div>
 <div id="id02" class="modal">
 
-  <form class="modal-content animate" action="/admin" method="post">
+  <form class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
@@ -58,13 +58,13 @@
     </div>
     <div class="container" style="background-color:#f2f2f2;padding:15px 5;">
       <label><b>Email Id<span class="required">*</span></b></label>
-      <input type="text" class="text-box" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter Email ID" name="adminname" required>
+      <input type="text" class="text-box" id="adminname" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter Email ID" name="adminname" required>
 
       <label><b>Password<span class="required">*</span></b></label>
-      <input type="password"  class="text-box" placeholder="Enter Password" name="psw" required>
+      <input type="password" id="password" class="text-box" placeholder="Enter Password" name="psw" required>
 
-      <button type="submit" >Login</button>
-
+      <button id="adminbutton" type="button" >Login</button>
+        <div id="adminflash"></div>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
@@ -88,10 +88,10 @@
 
     <div class="container"style="background-color:#f2f2f2;padding:15px 5;">
       <label><b>User Name<span class="required">*</span></b></label>
-      <input type="text" class="text-box" placeholder="Enter User Name" name="username" required>
+      <input type="text" id="uname" class="text-box" placeholder="Enter User Name" name="username" required>
 
       <label><b>Email-Id<span class="required">*</span></b></label>
-      <input type="text" class="text-box" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter Your EmailId" name="email" required><br>
+      <input type="text" id="umail" class="text-box" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter Your EmailId" name="email" required><br>
 
       <label><b>Password<span class="required">*</span></b></label>
       <input type="password" class="text-box" id="psw" placeholder="Enter Password" name="psw" required>
@@ -99,7 +99,8 @@
       <label><b>Confirm Password<span class="required">*</span></b></label>
       <input type="password" class="text-box" id="cpsw" placeholder="Re Enter Password" name="cpsw" required>
 
-      <button type="submit" onclick="return Validate()">Signup</button>
+      <button type="button" id="signupbutton">Signup</button>
+        <div id="signupflash"></div>
       <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
     </div>
  </form>
@@ -113,6 +114,8 @@
                 </ul>
             {% endif %}
         {% endwith %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="/static/script.js"></script>
+
 </body>
 </html>

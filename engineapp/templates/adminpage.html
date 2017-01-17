@@ -42,11 +42,11 @@
         <button type="button" class="btn"><a href="/adminlogout">logout </a></button>
     </div>
 
-<form action="/addingbook" method="post">
-    <h3>Book To Add:</h3> <input type="text" name="bookname" ><br>
-    <h3>Genre:</h3>      <input type="text" name="genre"><br>
-    <h3>Author:</h3>     <input type="text" name="authorname">
-            <input type="submit" value="submit">
+<form>
+    <h3>Book To Add:</h3> <input type="text" id="bookname" name="bookname" ><br>
+    <h3>Genre:</h3>      <input type="text" id="bookgenre" name="genre"><br>
+    <h3>Author:</h3>     <input type="text" id="authorname" name="authorname">
+    <button id="submit" type="button">Submit</button>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
@@ -56,9 +56,13 @@
             </ul>
         {% endif %}
     {% endwith %}
-
-
+    <br> <br>
+    <div id="flash"></div>
 </form>
 </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/adminpage.js"></script>
+
 </body>
 </html>

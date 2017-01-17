@@ -10,12 +10,13 @@
 <h1>Please Sign in Admin.</h1>
     <div class="main">
     <form action="/signedup" method="post">
-        <h3>Admin Name: <input type="text" placeholder="Enter AdminName" name="adminname"> </h3><br>
-        <h3>Admin Email: <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter Email-ID" name="adminemail"></h3><br>
-        <h3>Password: <input type="password" placeholder="Enter Password" name="adminpassword"></h3><br>
-        <h3>Confirm Password: <input type="password" placeholder="Confirm Password" name="confirmpassword"></h3><br>
-        <input type="submit" value="Submit">
+        <!--<h3>Admin Name: <input type="text" placeholder="Enter AdminName" name="adminname"> </h3><br>-->
+        <!--<h3>Admin Email: <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" placeholder="Enter Email-ID" name="adminemail"></h3><br>-->
+        <h3>Password: <input type="password" id="password" placeholder="Enter Password" name="adminpassword"></h3><br>
+        <h3>Confirm Password: <input type="password" id="cpassword" placeholder="Confirm Password" name="confirmpassword"></h3><br>
+        <button id="signup" type="button">Sign Up</button>
     </form>
+        <div id="flash"></div>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -27,5 +28,8 @@
         {% endif %}
     {% endwith %}
     </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/adminsignup.js"></script>
+
 </body>
 </html>

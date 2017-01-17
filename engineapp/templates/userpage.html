@@ -10,39 +10,31 @@
             <button type="button" class="btn"><a href= "/userlogout"> Logout </a></button>
         </div>
         <h1>Welcome To Book Store !!</h1>
-        <form action="/bookread" method="post">
+        <form>
 
                 <h3>List Of Books:</h3> <select name="book">
-        <option value="list of books"></option>
+        <!--<option value="list of books"></option>-->
         {% for book in book %}
-            <option > {{ book.name }}</option>
+            <option id="bookname"> {{ book.name }}</option>
         {% endfor %}
         </select><br><br>
-            <input type="submit" value="submit">
+            <button id="readbook" type="button" value="submit">Submit</button>
         </form>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                    <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-        <form action="/bookrequest" method="post">
+        <h4 id="flash"></h4>
+        <form>
             <h3>Request of books:</h3>
-            <h5>Book Name: </h5><input type='text' name="requirebook"><br>
-            <h5>Author: </h5><input type="text" name="authorname">
-            <input type="submit" value="submit">
+            <h5>Book Name: </h5><input type='text' id="requirebook" name="requirebook"><br>
+            <h5>Author: </h5><input type="text" id="authorname" name="authorname">
+            <button id="request" type="button">Submit</button>
 
         </form>
+        <div id="adminrequest"></div>
 
 
-        <br>
-        <p>Do you want to be an Admin of BookForms? Then <a href="/adminrequest">click here</a>. </p>
+        <p>Do you want to be an Admin of BookForms? Then <a id="admin" href="/adminsignup">click here</a>. </p>
 
-
-    </div>
-
-    </body>
+        </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/userpage.js"></script>
+</body>
 </html>

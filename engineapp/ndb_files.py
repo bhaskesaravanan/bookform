@@ -9,6 +9,7 @@ class Admins(ndb.Model):
     username = ndb.StringProperty()
     email = ndb.StringProperty()
     password = ndb.StringProperty()
+    by_user = ndb.KeyProperty(kind=UserDetails)
 
 class Books(ndb.Model):
     name = ndb.StringProperty()
