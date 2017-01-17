@@ -23,7 +23,7 @@ $(function() {
             type: 'POST',
             success: function(response) {
                 console.log(response)
-                $('#msg').html(response.result);
+                $('#flash').html(response.result);
             },
             error: function(error) {
                 console.log(error);
@@ -43,7 +43,7 @@ $(function() {
             type: 'POST',
             success: function(response) {
                 console.log(response)
-                $('#msg').html(response.result);
+                $('#flash').html(response.result);
             },
             error: function(error) {
                 console.log(error);

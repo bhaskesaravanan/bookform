@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>homepage</title>
-<link type="text/css" rel="stylesheet" href="/static/stylesheet/userpage.css"/>
+<link type="text/css" rel="stylesheet" href="/static/userpage.css"/>
 </head>
 <body>
 
@@ -10,28 +10,30 @@
         <button type="button" class="btn"><a href="/userlogout"> Logout </a></button>
     </div>
 <h1>Welcome To Book Store !!</h1>
-<form action="/bookread" method="post">
+<form>
 
-    <h3>List Of Books:</h3> <select name="book">
-                            <option value="list of books">list of books</option>
+    <h3>List Of Books:</h3> <select name="book" id="book">
+                            <option value="list of books" selected disabled>list of books</option>
                             {% for book in book %}
                                 <option > {{ book.name }}</option>
                             {% endfor %}
                             </select><br><br>
-                            <input type="submit" value="submit">
+                            <input type="button" id="submitbutton" value="submit">
 </form>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
-<form action="/bookrequest" method="post">
-    <h3>Request of books:</h3> <input type='text' name="requirebook">
-    <input type="submit" value="submit">
+    <div id="flash"></div>
+            <!--{% with messages = get_flashed_messages() %}-->
+            <!--{% if messages %}-->
+            <!--<ul>-->
+            <!--{% for message in messages %}-->
+            <!--<li>{{ message }}</li>-->
+            <!--{% endfor %}-->
+            <!--</ul>-->
+            <!--{% endif %}-->
+            <!--{% endwith %}-->
+<form>
+    <h3>Request of books:</h3> <input type='text' id="requirebook" name="requirebook">
+    <h3>Author Name:</h3><input type="text" id="authorname" name="authorname">
+    <input type="button" id="requestbutton" value="submit">
 
 </form>
 
@@ -41,6 +43,8 @@
 
 
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/userpage.js"></script>
 
 </body>
 </html>

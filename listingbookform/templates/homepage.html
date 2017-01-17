@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<link type="text/css" rel="stylesheet" href="static/homepage.css"/>
+<link type="text/css" rel="stylesheet" href="/static/homepage.css"/>
 <body>
 
 <h1>welcome to book reading</h1>
@@ -14,7 +14,7 @@
 
 <div id="id01" class="modal">
 
-  <form class="modal-content animate" action="/loginpage" method="post">
+  <form class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
@@ -24,12 +24,13 @@
     </div>
     <div class="container" style="background-color:#f2f2f2;padding:15px 5;">
       <label><b>EmailId<span class="required ">*</span></b></label>
-      <input type="text" placeholder="Enter EmailId" name="uemail" required>
+      <input type="text" placeholder="Enter EmailId"pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" id="uemail" name="uemail" required>
 
       <label><b>Password<span class="required">*</span></b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
 
-      <button type="submit">Login</button>
+      <button type="button" id="buttonlogin">Login</button>
+        <div id="flash"></div>
       <!--<input type="checkbox" checked="checked"> Remember me-->
     </div>
 
@@ -43,7 +44,7 @@
 </div>
 <div id="id02" class="modal">
 
-  <form class="modal-content animate" action="/admin" method="post">
+  <form class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
@@ -53,12 +54,13 @@
     </div>
     <div class="container" style="background-color:#f2f2f2;padding:15px 5;">
       <label><b>Email:<span class="required">*</span></b></label>
-      <input type="text" placeholder="Enter User name" name="uname" required>
+      <input type="text" placeholder="Enter User name" id="admin_mail" pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$" name="uname" required>
 
       <label><b>Password<span class="required">*</span></b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" placeholder="Enter Password" id="admin_password"name="psw" required>
 
-      <button type="submit">Login</button>
+      <button type="button" id="adminbutton">Login</button>
+        <div id="adminflash"></div>
       <!--<input type="checkbox" checked="checked"> Remember me-->
     </div>
 
@@ -72,7 +74,7 @@
 
 <div id="id03" class="modal">
 
- <form class="modal-content animate" action="/signup" method='post'>
+ <form class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
@@ -83,24 +85,25 @@
 
     <div class="container"style="background-color:#f2f2f2;padding:15px 5;">
       <label><b>User Name<span class="required">*</span></b></label>
-      <input type="text" placeholder="Enter User Name" name="uname" required>
+      <input type="text" placeholder="Enter User Name" id="uname" name="uname" required>
 
       <label><b>Email-Id<span class="required">*</span></b></label>
-      <input type="text" placeholder="Enter Your EmailId" name="email" required>
+      <input type="text" placeholder="Enter Your EmailId" id="email" name="email" required>
 
       <label><b>Password<span class="required">*</span></b></label>
-      <input type="password" id="pswd" placeholder="Enter Password" name="psw" required>
+      <input type="password" id="pswd" placeholder="Enter Password" id="spsw" name="psw" required>
 
       <label><b>Conform Password<span class="required">*</span></b></label>
-      <input type="password"  id="rpswd"placeholder="Re Enter Password" name="rpsw" required>
+      <input type="password"  id="rpswd"placeholder="Re Enter Password" id="repsw" name="rpsw" required>
 
-      <button type="submit" onclick="return Validate()">Signup</button>
+      <button type="button" id="signupbutton">Signup</button>
       <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
 
          <button type="button" id="google" style=" width: 170px;background: wheat;"><a href="/googlelogin" style="color: black;
         text-decoration: none;">Google SignIn</a></button>
-
+    <div id="signupflash"></div>
     </div>
+
 
 
  </form>
@@ -116,27 +119,7 @@
         {% endif %}
     {% endwith %}
    </div>
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-var modal= document.getElementById('id02');
-var modal= document.getElementById('id03');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-function Validate() {
-        var password = document.getElementById("pswd").value;
-        var confirmPassword = document.getElementById("rpswd").value;
-        if (password != confirmPassword) {
-            alert("Passwords do not match.");
-            return false;
-        }
-        return true;
-    }
-</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/homepage.js"></script>
 </body>
 </html>

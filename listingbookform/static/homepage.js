@@ -77,3 +77,31 @@ $(function() {
         });
     });
 });
+
+
+
+$(document).ready(function() {
+        $('#signupbutton').click(function() {
+         var username=$('#uname').val()
+         var emailid=$('#email').val()
+         var password=$('#spsw'). val()
+         var repassword=$('#repsw').val()
+        if(password == repassword){
+        $.ajax({
+            url: '/signup',
+            data: {'username':username,'emailid':emailid,'password':password},
+            type: 'POST',
+            success: function(response) {
+                console.log(response)
+                $('#signupflash').html(response.result);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        }
+        else
+            alert("Passwords do not match.");
+
+    });
+});
