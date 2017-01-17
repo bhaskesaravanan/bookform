@@ -28,7 +28,7 @@ $(document).ready(function() {
             url: '/loginpage',
             data: {"name": name, "password": password},
             type: 'POST',
-            async: true,
+//            async: true,
             success: function(response) {
                 if (response.result == '') {
                       window.location="/userpage";

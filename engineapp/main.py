@@ -161,8 +161,9 @@ def userlogout():
 def bookrequest():
     book = request.form['name']
     author = request.form['author']
-    if Books.query(Books.name == book).get():
-        if Books.query(Books.author == author).get():
+    if Books.query(ndb.AND(Books.name == book, Books.author == author)).get():
+    # if Books.query(Books.name == book).get():
+        # if Books.query(Books.author == author).get():
             # flash('The Book you requested is already in the Book list.')
             # return redirect(url_for('userpage'))
             data = 'The book you requested is already in the Book list.'
@@ -299,8 +300,9 @@ def addingBook():
     bookname = request.form['bookname']
     authorname = request.form['authorname']
     genre = request.form['genre']
-    if Books.query(Books.name == bookname).get():
-        if Books.query(Books.author == authorname).get():
+    if Books.query(ndb.AND(Books.name == bookname, Books.author == authorname)).get():
+    # if Books.query(Books.name == bookname).get():
+    #     if Books.query(Books.author == authorname).get():
             # flash('This book is already in our list.')
             # return redirect(url_for('adminpage'))
             data = 'This book is already in our list.'
