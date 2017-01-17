@@ -43,3 +43,21 @@ POST /addBook
    response : 
    
          { "success": true }
+         
+         
+post/requestbook
+
+   request:
+        
+     headers :
+        
+          content-type : application/json, api_key : "secret key"
+          
+     payload :
+       
+          {"bookname": "And then they were none ", "author": "Agatha Cristie"}
+          
+     response :
+      
+          {'success": true }
+              
