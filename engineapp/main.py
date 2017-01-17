@@ -220,23 +220,24 @@ def adminsignup():
 
 
 @app.route('/admin_signup_page')
+@login_required
 def admin_signup_page():
     return render_template('adminsignup.html')
 
 
-@app.route('/adminrequest')
-def adminrequest():
-    usermail = session['user_email']
-    if Admins.query(Admins.email == usermail).get():
-        # flash('You are already an Admin in BookForms.')
-        # return redirect(url_for('userpage'))
-        data = 'You are already an Admin  in BookForms.'
-        return jsonify(result = data)
-    deferred.defer(admin_request_mail, to)
-    # flash('Check out your email to get the link for admin form.')
-    # return redirect(url_for('userpage'))
-    data = 'Check out your mail to get the link for admin form.'
-    return jsonify(result = data)
+# @app.route('/adminrequest')
+# def adminrequest():
+#     usermail = session['user_email']
+#     if Admins.query(Admins.email == usermail).get():
+#         # flash('You are already an Admin in BookForms.')
+#         # return redirect(url_for('userpage'))
+#         data = 'You are already an Admin  in BookForms.'
+#         return jsonify(result = data)
+#     deferred.defer(admin_request_mail, to)
+#     # flash('Check out your email to get the link for admin form.')
+#     # return redirect(url_for('userpage'))
+#     data = 'Check out your mail to get the link for admin form.'
+#     return jsonify(result = data)
 
 @app.route('/signedup', methods=['POST'])
 def signedup():
