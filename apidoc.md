@@ -17,13 +17,13 @@
    response : 
     
           {
-            "books" : [
+            "books" : {
                          "id" : {
                              "name" : "harry potter"
                              "author" : "JK"
                              "category": "friction"
                           }
-                      ]
+                      }
            "cursor": "xdfsjlkdfjkldf"
            "more": true
           }
