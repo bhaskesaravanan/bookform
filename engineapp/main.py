@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, make_response
 from google.appengine.ext import deferred
 from google.appengine.api import mail
 from google.appengine.api import urlfetch
@@ -391,21 +391,62 @@ def resetpasswordstore():
      else:
          return 'Don\'t try to change the uid'
 
-# secret_key = 'anykey'
-# BOOKS_PER_PAGE = 2
-#
-# @app.route('/getbooks')
-# def getbooks():
-#     cursor = Cursor(urlsafe=request.args.get('cursor'))
-#     data, next_cursor, more = Books.query().fetch_page(BOOKS_PER_PAGE, start_cursor=cursor)
-#     dic = []
-#     x = 0
-#     for book in data:
-#         x+=1
-#         dic.append({x: {'name': book.name, 'genre': book.genre, 'author': book.author}})
-#     if more:
-#         book = {'books': dic, "cursor": next_cursor.urlsafe(), "more": more}
-#     return jsonify(book)
+secret_key = 'anykey'
+BOOKS_PER_PAGE = 2
+
+@app.route('/api')
+def api():
+    return render_template('api.html')
+
+@app.route('/getbooks')
+def getbooks():
+     if secret_key == request.headers.get('secret_key'):
+        cursor = Cursor(urlsafe = request.headers.get('cursor'))
+        data, next_cursor, more = Books.query().fetch_page(BOOKS_PER_PAGE, start_cursor=cursor)
+        dic = []
+        for book in data:
+            x = book.key.id()
+            dic.append({x: {'name': book.name, 'genre': book.genre, 'author': book.author}})
+        # if more or next_cursor:
+        book = {'books': dic, "cursor": next_cursor.urlsafe(), "more": more}
+        return jsonify(book)
+     else:
+         return make_response(jsonify({'error': 'Invalid secret_key'}), 404)
+
+@app.route('/insertbooks', methods=['POST'])
+def insertbooks():
+    if secret_key == request.headers.get('secret_key'):
+        # data = request.get_json(force=True)
+        bookname = request.form['name']
+        bookauthor = request.form['author']
+        bookgenre = request.form['genre']
+        if Books.query(ndb.AND(Books.name == bookname, Books.author == bookauthor)).get():
+            # data = 'This book is already in the list'
+            return make_response(jsonify({'result': 'This book is already in the list'}), 200)
+        else:
+            books = Books(name = bookname, genre = bookgenre, author = bookauthor)
+            books.put()
+            # data = 'Book added successfully'
+            return make_response(jsonify({'result': 'Book added successfully'}), 200)
+    else:
+        return make_response(jsonify({'error': 'Invalid secret_key'}), 404)
+
+@app.route('/update')
+def update():
+    url = 'http://localhost:9000/insertbooks'
+    # payload = {'cursor': cursor}
+    data = {'name': 'Mahabharatha', 'author': 'Vyasa', 'genre': 'Historical'}
+    header = {'secret_key': 'anykey'}
+    r = urlfetch.fetch(url, headers=header, method=urlfetch.POST, payload=urlencode(data))
+    return r.content
+
+@app.route('/receive')
+def receive():
+        url = 'http://localhost:9000/getbooks'
+        header = {'secret_key': 'anykey'}
+        r = urlfetch.fetch(url, headers=header)
+        return r.content
+
 
 if __name__ == '__main__':
     app.run(debug=True)
