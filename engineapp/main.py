@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from google.appengine.ext import deferred
 from google.appengine.api import mail
 from google.appengine.api import urlfetch
+from google.appengine.datastore.datastore_query import Cursor
 from urllib import urlencode
 import logging
 import json
@@ -199,14 +200,15 @@ def bookread():
 def signup():
     userdet = UserDetails.query().fetch()
     data = request.get_json(force=True)
-    for user in userdet:
-        if user.email_ID == data.get('umail'):
+    if UserDetails.query(UserDetails.email_ID == data.get('umail')).get():
+    # for user in userdet:
+    #     if user.email_ID == data.get('umail'):
             # flash('The email ID you entered has already been signed up.')
             # return redirect(url_for('homepage'))
-            data = 'The email ID you entered has already been signed up.'
-            return jsonify(result = data)
-        else:
-            continue
+        data = 'The email ID you entered has already been signed up.'
+        return jsonify(result = data)
+        # else:
+        #     continue
     else:
         userdetails(data)
         # flash('Signed up successfully. Log in to access your account in BookForm.')
@@ -389,6 +391,21 @@ def resetpasswordstore():
      else:
          return 'Don\'t try to change the uid'
 
+# secret_key = 'anykey'
+# BOOKS_PER_PAGE = 2
+#
+# @app.route('/getbooks')
+# def getbooks():
+#     cursor = Cursor(urlsafe=request.args.get('cursor'))
+#     data, next_cursor, more = Books.query().fetch_page(BOOKS_PER_PAGE, start_cursor=cursor)
+#     dic = []
+#     x = 0
+#     for book in data:
+#         x+=1
+#         dic.append({x: {'name': book.name, 'genre': book.genre, 'author': book.author}})
+#     if more:
+#         book = {'books': dic, "cursor": next_cursor.urlsafe(), "more": more}
+#     return jsonify(book)
 
 if __name__ == '__main__':
     app.run(debug=True)
