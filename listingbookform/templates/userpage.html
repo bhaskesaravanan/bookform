@@ -12,11 +12,11 @@
 <h1>Welcome To Book Store !!</h1>
 <form>
 
-    <h3>List Of Books:</h3> <select name="book" id="book">
-                            <option value="list of books" selected disabled>list of books</option>
-                            {% for book in book %}
-                                <option > {{ book.name }}</option>
-                            {% endfor %}
+    <h3>List Of Books:</h3> <select name="book" id="book" onclick="booklist()">
+                            <option value="list of books" >list of books</option>
+                            <!--{% for book in book %}-->
+                                <!--<option > {{ book.name }}</option>-->
+                            <!--{% endfor %}-->
                             </select><br><br>
                             <input type="button" id="submitbutton" value="submit">
 </form>

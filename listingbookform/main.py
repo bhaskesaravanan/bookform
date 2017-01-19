@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session,jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, session,jsonify,make_response
+from flask_restful import Resource, Api, reqparse
 from google.appengine.ext import deferred
 from google.appengine.api import mail
 from google.appengine.ext import ndb
 from google.appengine.api import urlfetch
 from urllib import urlencode
+from google.appengine.datastore.datastore_query import Cursor
 import logging
 
 import config
@@ -20,6 +22,7 @@ from functools import wraps
 from models.bookformndbfiles import *
 log = logging.getLogger(__name__)
 app = Flask(__name__)
+api = Api(app)
 app.secret_key = os.urandom(24)
 
 CLIENT_ID = '545443502559-k8nlkopm7l2vdvhgi2s9gjssv4msu9si.apps.googleusercontent.com'
@@ -389,6 +392,87 @@ def bookvalidation():
     return jsonify(result=data)
 
 
+@app.route('/get_books')
+def get_books():
+# data = json.dumps({'isDown': 'Nope'})
+# return data, 200, {'Content-Type': 'application/json'}
+    books=Books.query().fetch()
+    logging.info(books)
+    payload=[]
+    for book in books:
+        payload.append(book.name)
+        logging.info(payload)
+    payload = json.dumps({"Books": payload})
+    logging.info(payload)
+    headers = {'Content-Type': 'application/json'}
+    return payload,200,headers
+
+
+secret_key='anykey'
+Books_Per_Page=2
+
+parser = reqparse.RequestParser()
+parser.add_argument('bookname')
+parser.add_argument('authorname')
+parser.add_argument('genre')
+
+
+
+
+
+class Book(Resource):
+
+    def get(self):
+         if secret_key == request.headers.get('secret_key'):
+            cursor = Cursor(urlsafe=request.args.get('cursor'))
+            data, next_cursor, more = Books.query().fetch_page(Books_Per_Page, start_cursor=cursor)
+            booklist = []
+            for book in data:
+                x = book.key.id()
+                booklist.append({'id':x, 'name': book.name, 'genre': book.genre, 'author': book.author}})
+            if more or next_cursor:
+                book = {'books': booklist, "cursor": next_cursor.urlsafe(), "more": more}
+            return jsonify(book)
+         else:
+             return jsonify({'Invalid Secret Key'})
+
+    def post(self):
+         args = parser.parse_args()
+
+         if secret_key == request.headers.get('secret_key'):
+             bookname = args[ 'bookname' ]
+             authorname = args[ 'authorname' ]
+             genre = args[ 'genre' ]
+             if Books.query(ndb.AND(Books.name == bookname, Books.author == authorname)).get():
+                 return make_response(jsonify({'result':'Book is already in the list'}),200)
+             else:
+                 bookadd = Books(name=bookname, genre=genre, author=authorname)
+                 bookadd.put()
+                 return make_response(jsonify({"success":"True"}),200)
+
+         else:
+             return make_response(jsonify({'Invalid Secret key'}))
+
+
+
+
+
+
+
+
+# @app.route('/requestbook',methods = ['POST'])
+# def requestbook():
+#     if secret_key == request.headers.get('secret_key'):
+#         bookname = request.form['bookname']
+#         authorname = request.form['authorname']
+#         emailid=request.form['Email']
+#         if Books.query(ndb.AND(Books.name == bookname, Books.author == authorname)).get():
+#             return make_response(jsonify({'result':'Book is already in the list'}),200)
+#         else:
+#             newbook_request_mailing()
+
+
+api.add_resource(Book, '/Book')
 
 if __name__ == '__main__':
     app.run(debug=True)

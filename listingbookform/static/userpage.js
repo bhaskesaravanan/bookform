@@ -10,8 +10,29 @@
 //  xhttp.send();
 //}
 
+function booklist() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+            var book=JSON.parse(this.responseText)
+            console.log(book)
+            forEach(function(book){
+                console.log(book);
+                var elm = document.getElementById("options");
+                elm.innerHTML = elm.innerHTML + "<option >" + book+"</option>";
+            });
+            }
+            }
+    xhttp.open("GET", "/get_books", true);
+    xhttp.send();
+}
 
-
+<ul>
+  <li>
+     <span>"nandl"</span>
+     <button id="20580952">request</button>
+  </li>
+</ul>
 $(function() {
         $('#requestbutton').click(function() {
          var bookname=$('#requirebook').val()
