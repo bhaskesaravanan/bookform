@@ -2,9 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+    <h1>Get Button</h1>
+    <button type="button" id="get"><a href="/getbooks"> Get Button</a></button><br><br>
+    <div id="flash"></div>
+    <div>
+        <ul id="books"></ul>
+    </div>
+    <h1>Post Button</h1>
+    <form>
+        <h4>Book name: </h4><input type="text" id="name"><br>
+        <h4>Author: </h4><input type="text" id="author"><br>
+        <h4>Genre: </h4><input type="text" id="genre"><br>
+        <button type="button" id="post">Post Button</button>
+    </form>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!--<script>-->
+    <!--var cursor = null;-->
+    <!--$('#get').click(function()-->
+    <!--{-->
+        <!--$.ajax({-->
+            <!--url: '/getbooks',-->
+            <!--type: 'GET',-->
+            <!--headers: {'secret_key': 'anykey'},-->
+            <!--&lt;!&ndash;data: {'cursor': cursor},&ndash;&gt;-->
+            <!--success: function(response)-->
+            <!--{-->
+                <!--console.log(response);-->
+                <!--&lt;!&ndash;data = JSON.parse(response);&ndash;&gt;-->
+
+                <!--var book_elm = $("#books")-->
+                <!--for(var item of response.books)-->
+                <!--{-->
+                    <!--book_elm.append("<li>" + item.name + "</li>");-->
+
+                    <!--console.log(item);-->
+
+                <!--}-->
+                <!--&lt;!&ndash;cursor = response['cursor'];&ndash;&gt;-->
+            <!--},-->
+            <!--error: function(error)-->
+            <!--{-->
+                <!--console.log(error);-->
+            <!--}-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
 </body>
 </html>

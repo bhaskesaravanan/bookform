@@ -52,7 +52,7 @@ $(document).ready(function() {
             url: '/admin',
             data: JSON.stringify({"adminname": adminname, "password": password}),
             type: 'POST',
-            async: true,
+//            async: true,
             success: function(response) {
                 if (response.result == '') {
                       window.location="/adminpage";

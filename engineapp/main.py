@@ -405,8 +405,7 @@ def getbooks():
         data, next_cursor, more = Books.query().fetch_page(BOOKS_PER_PAGE, start_cursor=cursor)
         dic = []
         for book in data:
-            x = book.key.id()
-            dic.append({x: {'name': book.name, 'genre': book.genre, 'author': book.author}})
+            dic.append({'id': book.key.id(), 'name': book.name, 'genre': book.genre, 'author': book.author})
         # if more or next_cursor:
         book = {'books': dic, "cursor": next_cursor.urlsafe(), "more": more}
         return jsonify(book)
@@ -416,10 +415,13 @@ def getbooks():
 @app.route('/insertbooks', methods=['POST'])
 def insertbooks():
     if secret_key == request.headers.get('secret_key'):
-        # data = request.get_json(force=True)
-        bookname = request.form['name']
-        bookauthor = request.form['author']
-        bookgenre = request.form['genre']
+        data = request.get_json()
+        # bookname = request.form['name']
+        # bookauthor = request.form['author']
+        # bookgenre = request.form['genre']
+        bookname = data.get('name')
+        bookauthor = data.get('author')
+        bookgenre = data.get('genre')
         if Books.query(ndb.AND(Books.name == bookname, Books.author == bookauthor)).get():
             # data = 'This book is already in the list'
             return make_response(jsonify({'result': 'This book is already in the list'}), 200)
@@ -435,9 +437,9 @@ def insertbooks():
 def update():
     url = 'http://localhost:9000/insertbooks'
     # payload = {'cursor': cursor}
-    data = {'name': 'Mahabharatha', 'author': 'Vyasa', 'genre': 'Historical'}
-    header = {'secret_key': 'anykey'}
-    r = urlfetch.fetch(url, headers=header, method=urlfetch.POST, payload=urlencode(data))
+    data = {"name": "Mahabharatha", "author": "Vyasa", "genre": "Historical"}
+    header = {'secret_key': 'anykey', 'Content-Type': 'application/json'}
+    r = urlfetch.fetch(url, headers=header, method=urlfetch.POST, payload=json.dumps(data))
     return r.content
 
 @app.route('/receive')
