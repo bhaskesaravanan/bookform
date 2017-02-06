@@ -44,7 +44,7 @@ POST /Book
    
          { "success": true, id: 43243-5253098-ldslf }
          
- PUT /Book/<id>
+ PUT /Book/< id >
     
     request:
 
@@ -61,7 +61,7 @@ POST /Book
          { "success": true, id: 43243-5253098-ldslf }
          
          
- DELETE /Book/<id>
+ DELETE /Book/< id >
     
     request:
 
