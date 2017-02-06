@@ -46,7 +46,7 @@ POST /Book
          
  PUT /Book/< id >
     
-    request:
+   request:
 
       headers : 
 
@@ -63,7 +63,7 @@ POST /Book
          
  DELETE /Book/< id >
     
-    request:
+   request:
 
       headers : 
 
@@ -77,7 +77,7 @@ POST /Book
     
          
          
-post/requestbook
+post /requestbook
 
    request:
         
@@ -89,7 +89,7 @@ post/requestbook
        
           {"bookname": "And then they were none ", "author": "Agatha Cristie"}
           
-     response :
+    response :
       
           {'success": true }
               
