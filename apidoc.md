@@ -1,5 +1,5 @@
 
- GET /getBook
+ GET /Book
  
   request:
      
@@ -28,7 +28,7 @@
            "more": true
           }
 
-POST /addBook
+POST /Book
    
    request:
 
@@ -42,7 +42,39 @@ POST /addBook
 
    response : 
    
-         { "success": true }
+         { "success": true, id: 43243-5253098-ldslf }
+         
+ PUT /Book/<id>
+    
+    request:
+
+      headers : 
+
+           Content-type : application/json, api_key : "secret key"
+
+      payload :
+
+           { "name" : "harry potter", "author": "JK", "category" : "friction"}
+
+   response : 
+   
+         { "success": true, id: 43243-5253098-ldslf }
+         
+         
+ DELETE /Book/<id>
+    
+    request:
+
+      headers : 
+
+          api_key : "secret key"
+
+   response : 
+   
+         { "success": true, id: 43243-5253098-ldslf }
+    
+    
+    
          
          
 post/requestbook
