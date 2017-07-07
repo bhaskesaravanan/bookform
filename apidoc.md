@@ -1,5 +1,7 @@
 
- GET /Book
+Base url : https://bookform.appspot.com
+ 
+GET /Book
  
   request:
      
