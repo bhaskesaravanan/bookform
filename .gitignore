@@ -2,3 +2,6 @@ listingbookform/lib
 .idea/
 *.pyc
 listingbookform/.idea
+.DS_Store
+listingbookform11/.DS_Store
+listingbookform11/static/.DS_Store

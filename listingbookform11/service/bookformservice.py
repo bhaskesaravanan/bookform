@@ -22,5 +22,9 @@ def userpage():
     books = Book.query().fetch()
     return render_template('userpage.html', books=books)
 
+@app.route('/hermes')
+def load_hermes():
+    return render_template('new_hermes.html')
+
 
 
